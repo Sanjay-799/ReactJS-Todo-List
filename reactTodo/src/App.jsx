@@ -1,33 +1,60 @@
-
+import { useState } from 'react'
 import './App.css'
+import TaskItem from './Components/TaskItem'
 
 function App() {
 
+  const[newTask,setNewTask]=useState("");
+  const[myTask,setMyTask]=useState([])
+
+  function handleInput(e){
+    let NewValue=e.target.value;
+    setNewTask(NewValue)
+    
+  }
+
+  function addTask(){
+    setMyTask(prev=>[...prev,newTask])
+    console.log(myTask)
+    setNewTask("")
+    
+  }
+
+  function deleteTask(taskName){
+    let afterDeletionTask=myTask.filter(x=>x!=taskName)
+    console.log(taskName)
+    setMyTask(afterDeletionTask)
+  }
  
 
   return (
     <div className='main-body d-flex justify-content-center align-items-center'>
       <div className='todo-list-mainDiv '>
-        <h3>My Todo List</h3>
+        <h3 className='heading'>My Todo List</h3>
         <div>
           <div className='todo-task-input-div'>
             <div class="form-floating w-75">
-              <input type="text" className="form-control" id="floatingInput" placeholder="Todo task" />
+              <input type="text" className="form-control" id="floatingInput" placeholder="Todo task" onChange={(e)=>{
+                handleInput(e)
+
+              }} value={newTask}/>
               <label htmlFor="floatingInput">Todo Task</label>
             </div>
-            <buttom className="btn btn-primary" id='add-button'>+</buttom>
+            <buttom className="btn btn-primary" id='add-button' onClick={()=>{
+              addTask()
+            }}>+</buttom>
           </div>
           
           
           <ul className='task-list'>
-            <li className='task d-flex justify-content-between'>Writing Notes
-              <div className='task-buttons w-25'>
-                <button className='btn btn-sm btn-success'>Edit</button>
-                <button className='btn btn-sm btn-danger'>Delete</button>
-              </div>
-            </li>
-            <li>Reading Book</li>
-            <li>Attending Event</li>
+            {
+              myTask.map((task,index)=>
+                <TaskItem taskName={task} key={index} deleteTask={deleteTask}/>
+
+              )
+            }
+            
+           
           </ul>
         </div>
 
