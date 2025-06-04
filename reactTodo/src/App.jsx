@@ -13,12 +13,15 @@ function App() {
     
   }
 
-  function addTask(){
-    setMyTask(prev=>[...prev,newTask])
-    console.log(myTask)
-    setNewTask("")
-    
+  function addTask() {
+  if (newTask.trim() === "") {
+    alert("Please enter a task before submitting.");
+    return;
   }
+  setMyTask(prev => [...prev, newTask]);
+  setNewTask("");
+}
+
 
   function deleteTask(taskName){
     let afterDeletionTask=myTask.filter(x=>x!=taskName)
@@ -42,7 +45,7 @@ function App() {
             </div>
             <buttom className="btn btn-primary" id='add-button' onClick={()=>{
               addTask()
-            }}>+</buttom>
+            }}>Submit</buttom>
           </div>
           
           
