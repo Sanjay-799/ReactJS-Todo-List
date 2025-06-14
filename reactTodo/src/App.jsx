@@ -31,10 +31,9 @@ function App() {
  
 
   return (
-    <div className='main-body d-flex justify-content-center align-items-center'>
-      <div className='todo-list-mainDiv '>
+    <div className='main-body d-flex justify-content-center align-items-center container'>
+      <div className='todo-list-mainDiv'>
         <h3 className='heading'>My Todo List</h3>
-        <div>
           <div className='todo-task-input-div'>
             <div class="form-floating w-75">
               <input type="text" className="form-control" id="floatingInput" placeholder="Todo task" onChange={(e)=>{
@@ -59,9 +58,6 @@ function App() {
             
            
           </ul>
-        </div>
-
-
       </div>
     </div>
   )
